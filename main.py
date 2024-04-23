@@ -21,7 +21,7 @@ def print_devices(devices: list[str]) -> None:
         print(f"{i}: {device}")
 
 
-def stream(device_index: int, input: str):
+def stream(device_index: int, input: str) -> None:
     audio: PyAudio = pyaudio.PyAudio()
     headers: dict[str, str] = {
         "Authorization": f'Bearer {os.getenv("OPENAI_API_KEY")}',
@@ -53,7 +53,6 @@ def stream(device_index: int, input: str):
             while (data := wave_read.readframes(1024)) != b"":
                 stream.write(data)
 
-            time.sleep(1)
             stream.stop_stream()
             stream.close()
             audio.terminate()
