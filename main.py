@@ -9,8 +9,9 @@ from requests.models import Response
 import wave
 
 
-# DEVICE_NAME: str = "BlackHole 2ch"
-DEVICE_NAME: str = "Studio Display Speakers"
+
+#DEVICE_NAME: str = "Studio Display Speakers"
+DEVICE_NAME: str = "BlackHole 2ch"
 MODEL: str = "tts-1"
 VOICE: str = "onyx"
 
