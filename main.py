@@ -1,6 +1,4 @@
 import os
-import time
-from typing import Optional
 
 import pyaudio
 from pyaudio import PyAudio
@@ -43,19 +41,19 @@ def stream(device_index: int, input: str) -> None:
     )
     if response.ok:
         with wave.open(f=response.raw, mode="rb") as wave_read:
-            stream = audio.open(
+            audio_stream = audio.open(
                 format=audio.get_format_from_width(wave_read.getsampwidth()),
                 channels=wave_read.getnchannels(),
-                rate=wave_read.getframerate(),  # je kleiner deso langsamer
+                rate=wave_read.getframerate(),
                 output=True,
                 output_device_index=device_index,
             )
 
             while (data := wave_read.readframes(1024)) != b"":
-                stream.write(data)
+                audio_stream.write(data)
 
-            stream.stop_stream()
-            stream.close()
+            audio_stream.stop_stream()
+            audio_stream.close()
             audio.terminate()
 
 
@@ -67,7 +65,7 @@ def list_devices() -> list[str]:
     return devices
 
 
-def find_device_index(name: str) -> Optional[int]:
+def find_device_index(name: str) -> int | None:
     devices: list[str] = list_devices()
     for device in devices:
         if name in device:

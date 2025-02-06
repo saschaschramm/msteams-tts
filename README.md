@@ -10,6 +10,11 @@ brew install blackhole-2ch
 ```
 
 2. **Install the requirements**
+PortAudio is required for the PyAudio package.
+```bash
+brew install portaudio
+```
+
 ```bash
 pip install -r requirements.txt
 ```
